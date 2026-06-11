@@ -70,7 +70,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
       hasCertificate: true,
       photo: 'https://picsum.photos/200/280',
       exams: [
-        { course: '电气安全规范', method: '笔试', examTime: '2026-05-18 09:30', score: 92, result: '合格' },
+        { course: '电气安全规范', method: '笔试', examTime: '2026-05-18 09:30', score: 50, result: '不合格' },
         { course: '高压设备操作', method: '实操', examTime: '2026-05-18 09:30', score: 100, result: '合格' },
         { course: '事故应急处理', method: '口试', examTime: '2026-05-18 09:30', score: 90, result: '合格' }
       ]
@@ -942,9 +942,9 @@ const updatedProcess = {
                       ? '已存在有效证书'
                       : !hasPhoto
                       ? '缺少照片'
-                      : allPassed
-                      ? '符合发证条件'
-                      : '存在不合格课程';
+                      : !allPassed
+                      ? '存在不合格课程'
+                      : '';
 
                     const selected = selectedCandidates.find(
                       (item) => item.id === employee.id
@@ -987,19 +987,21 @@ const updatedProcess = {
                           </div>
 
                           <div className="flex items-center gap-3 shrink-0">
-                            <span
-                              className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(status)}`}
-                            >
-                              {status}
-                            </span>
+                          {status && (
+  <span
+    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(status)}`}
+  >
+    {status}
+  </span>
+)}
 
                             <button
-                              disabled={!allPassed || employee.hasCertificate}
+                              disabled={!employee.photo}
                               onClick={() => toggleCandidate(employee)}
                               className={`px-5 py-2 rounded-xl font-medium ${
                                 selected
                                   ? 'bg-red-100 text-red-700'
-                                  : !allPassed || employee.hasCertificate
+                                  : !employee.photo
                                   ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                                   : 'bg-blue-600 text-white'
                               }`}
