@@ -41,22 +41,22 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
   const orgTree = [
     {
       workshop: '公辅车间',
-      teams: ['危化班组', '消防班组', '水处理班组']
+      teams: ['电仪', '维修班组', '溶液处理']
     },
     {
       workshop: '动力车间',
-      teams: ['高压电工班组', '维修班组', '配电班组']
+      teams: ['高压电工', '操作工', '配电班组']
     },
     {
       workshop: '成品车间',
-      teams: ['叉车班组', '包装班组', '成品操作班组']
+      teams: ['电工', '钳工', '中控']
     }
   ];
 
   const trainingPlans = [
-    '高压电工岗位培训',
-    '叉车岗位培训',
-    '危化品岗位培训'
+    '高压电工岗',
+    '叉车岗',
+    '危化品岗'
   ];
 
   const [employees, setEmployees] = useState([
@@ -66,7 +66,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
       workshop: '动力车间',
       team: '高压电工班组',
       post: '高压电工',
-      training: '高压电工岗位培训',
+      training: '高压电工岗',
       hasCertificate: true,
       photo: 'https://picsum.photos/200/280',
       exams: [
@@ -81,7 +81,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
       workshop: '动力车间',
       team: '高压电工班组',
       post: '高压电工',
-      training: '高压电工岗位培训',
+      training: '高压电工岗',
       hasCertificate: false,
       photo: 'https://picsum.photos/200/280',
       exams: [
@@ -96,7 +96,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
       workshop: '动力车间',
       team: '高压电工班组',
       post: '高压电工',
-      training: '高压电工岗位培训',
+      training: '高压电工岗',
       hasCertificate: false,
       photo: null,
       exams: [
@@ -111,7 +111,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
     [
     {
       id: 'GZ20260520-001',
-      training: '高压电工岗位培训',
+      training: '高压电工岗',
       workshop: '动力车间',
       people: 28,
       createTime: '2026-05-20 09:30',
@@ -198,8 +198,8 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
     },
     {
       id: 'GZ20260518-002',
-      training: '叉车岗位培训',
-      workshop: '成品车间',
+      training: '操作工',
+      workshop: '动力车间',
       people: 16,
       createTime: '2026-05-18 14:20',
 creator: '李想',
@@ -208,8 +208,8 @@ creator: '李想',
     },
     {
       id: 'GZ20260516-003',
-      training: '危化品岗位培训',
-      workshop: '公辅车间',
+      training: '配电班组',
+      workshop: '动力车间',
       people: 36,
       createTime: '2026-05-16 16:40',
 creator: '王磊',
@@ -225,11 +225,9 @@ creator: '王磊',
         e.post.includes(keyword) ||
         e.workshop.includes(keyword);
 
-      const matchTraining = e.training === selectedTraining;
-
-      return matchKeyword && matchTraining;
+      return matchKeyword ;
     });
-  }, [keyword, selectedTraining]);
+  }, [keyword]);
 
   const toggleCandidate = (employee) => {
     const exists = selectedCandidates.find((item) => item.id === employee.id);
@@ -457,7 +455,7 @@ creator: '王磊',
                     <thead className="bg-slate-50 text-slate-500">
                       <tr>
                         <th className="px-6 py-4 text-left">流程编号</th>
-                        <th className="px-6 py-4 text-left">岗位培训</th>
+                        <th className="px-6 py-4 text-left">岗位</th>
                         <th className="px-6 py-4 text-left">所属车间</th>
                         <th className="px-6 py-4 text-left">发证人数</th>
                         <th className="px-6 py-4 text-left">创建时间</th>
@@ -864,17 +862,11 @@ const updatedProcess = {
 
               <div className="grid grid-cols-4 gap-5">
                 <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-                  <div className="text-sm text-slate-500">岗位培训计划</div>
+                  <div className="text-sm text-slate-500">岗位</div>
 
-                  <select
-                    value={selectedTraining}
-                    onChange={(e) => setSelectedTraining(e.target.value)}
-                    className="w-full mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm"
-                  >
-                    {trainingPlans.map((item, index) => (
-                      <option key={index}>{item}</option>
-                    ))}
-                  </select>
+                  <div className="w-full mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm text-slate-800">
+  高压电工岗
+</div>
                 </div>
 
                 <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
@@ -996,12 +988,12 @@ const updatedProcess = {
 )}
 
                             <button
-                              disabled={!employee.photo}
+                              disabled={!employee.photo || !allPassed}
                               onClick={() => toggleCandidate(employee)}
                               className={`px-5 py-2 rounded-xl font-medium ${
                                 selected
                                   ? 'bg-red-100 text-red-700'
-                                  : !employee.photo
+                                  : !employee.photo || !allPassed
                                   ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                                   : 'bg-blue-600 text-white'
                               }`}
