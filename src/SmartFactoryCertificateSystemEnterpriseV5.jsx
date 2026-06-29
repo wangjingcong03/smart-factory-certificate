@@ -116,7 +116,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
       people: 28,
       createTime: '2026-05-20 09:30',
       creator: '张伟',
-      status: '待审批',
+      status: '员工确认中',
       approvalStep: 0,
       employees:[
         {id:1,name:'张伟',post:'高压电工',score:92,certificateStatus:'已发证',
@@ -202,7 +202,7 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
       workshop: '动力车间',
       people: 16,
       createTime: '2026-05-18 14:20',
-creator: '李想',
+      creator: '李想',
       status: '已通过',
       employees:[{id:4,name:'赵强',post:'叉车工',score:95,certificateStatus:'已发证'}]
     },
@@ -212,7 +212,61 @@ creator: '李想',
       workshop: '动力车间',
       people: 36,
       createTime: '2026-05-16 16:40',
-creator: '王磊',
+      creator: '王磊',
+      status: '已驳回',
+      employees:[]
+    },
+    {
+      id: 'GZ20260522-004',
+      training: '叉车岗',
+      workshop: '成品车间',
+      people: 12,
+      createTime: '2026-05-22 10:15',
+      creator: '赵强',
+      status: '员工确认中',
+      approvalStep: 0,
+      employees:[]
+    },
+    {
+      id: 'GZ20260523-005',
+      training: '危化品岗',
+      workshop: '公辅车间',
+      people: 18,
+      createTime: '2026-05-23 15:40',
+      creator: '陈涛',
+      status: '车间审批中',
+      approvalStep: 1,
+      employees:[]
+    },
+    {
+      id: 'GZ20260524-006',
+      training: '电工岗',
+      workshop: '成品车间',
+      people: 9,
+      createTime: '2026-05-24 08:50',
+      creator: '刘洋',
+      status: '人力审批中',
+      approvalStep: 2,
+      employees:[]
+    },
+    {
+      id: 'GZ20260525-007',
+      training: '维修钳工岗',
+      workshop: '公辅车间',
+      people: 14,
+      createTime: '2026-05-25 13:20',
+      creator: '孙凯',
+      status: '已通过',
+      approvalStep: 3,
+      employees:[]
+    },
+    {
+      id: 'GZ20260526-008',
+      training: '配电运行岗',
+      workshop: '动力车间',
+      people: 11,
+      createTime: '2026-05-26 17:05',
+      creator: '周波',
       status: '已驳回',
       employees:[]
     }
@@ -253,13 +307,22 @@ creator: '王磊',
       return 'bg-emerald-100 text-emerald-700';
     }
 
-    if (status === '待审批') {
+    if (status === '员工确认中') {
+      return 'bg-blue-100 text-blue-700';
+    }
+
+    if (status === '车间审批中') {
       return 'bg-amber-100 text-amber-700';
+    }
+
+    if (status === '人力审批中') {
+      return 'bg-purple-100 text-purple-700';
     }
 
     if (status === '已存在有效证书') {
       return 'bg-slate-100 text-slate-600';
     }
+
     if (status === '缺少照片') {
       return 'bg-orange-100 text-orange-700';
     }
@@ -1067,6 +1130,9 @@ const updatedProcess = {
   </span>
 
 </label>
+<div className="text-xs text-slate-500">
+  照片要求：一寸蓝底彩照，穿工作服、戴安全帽，人像清晰。
+</div>
     </div>
   </div>
 )}
