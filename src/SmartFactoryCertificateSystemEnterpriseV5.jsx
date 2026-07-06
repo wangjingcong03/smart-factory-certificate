@@ -30,12 +30,8 @@ export default function SmartFactoryCertificateSystemEnterpriseV5() {
   ]
 
   const menuItems = [
-    { id: 'home', label: '首页' },
-    { id: 'training', label: '培训管理' },
     { id: 'exam', label: '考试管理' },
     { id: 'certificate', label: '上岗证管理' },
-    { id: 'qualification', label: '人员资质管理' },
-    { id: 'hazard', label: '隐患整改' },
   ];
 
   const orgTree = [
@@ -703,7 +699,7 @@ const updatedProcess = {
       </div>
 
       <div className="text-sm text-slate-500">
-        已确认
+        2026-05-20 10:00
       </div>
     </div>
   </div>
@@ -715,11 +711,11 @@ const updatedProcess = {
 
     <div>
       <div className="font-medium">
-        车间负责人审批通过
+        车间负责人已审批
       </div>
 
       <div className="text-sm text-slate-500">
-        审批完成
+        2026-05-20 14:30
       </div>
     </div>
   </div>
@@ -731,11 +727,11 @@ const updatedProcess = {
 
     <div>
       <div className="font-medium">
-        人力资源部审批通过
+        人力资源部已审批
       </div>
 
       <div className="text-sm text-slate-500">
-        自动盖章处理中
+        2026-05-21 09:15
       </div>
     </div>
   </div>
@@ -743,15 +739,15 @@ const updatedProcess = {
 
 {selectedProcess.approvalStep >= 3 && (
   <div className="flex gap-4">
-    <div className="w-3 h-3 rounded-full bg-green-500 mt-2"></div>
+    <div className="w-3 h-3 rounded-full bg-green-600 mt-2"></div>
 
     <div>
       <div className="font-medium">
-        自动盖章完成
+        审批完成，证书已生效
       </div>
 
       <div className="text-sm text-slate-500">
-        证书已生成
+        2026-05-21 10:00
       </div>
     </div>
   </div>
@@ -760,16 +756,17 @@ const updatedProcess = {
   </div>
 </div>
 
-              <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden">
-                <div className="p-6 border-b border-slate-100">
-                  <div className="text-xl font-bold text-slate-800">发证人员列表</div>
+              <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm overflow-hidden">
+                <div className="text-xl font-bold text-slate-800 mb-6">
+                  发证人员明细
                 </div>
+
                 <table className="w-full text-sm">
                   <thead className="bg-slate-50 text-slate-500">
                     <tr>
-                    <th className="px-6 py-4 text-left">姓名</th>
-  <th className="px-6 py-4 text-left">岗位</th>
-  <th className="px-6 py-4 text-left">课程数量</th>
+                      <th className="px-6 py-4 text-left">姓名</th>
+                      <th className="px-6 py-4 text-left">岗位</th>
+                      <th className="px-6 py-4 text-left">课程数量</th>
   <th className="px-6 py-4 text-left">证书状态</th>
   <th className="px-6 py-4 text-left">操作</th>
                     </tr>
